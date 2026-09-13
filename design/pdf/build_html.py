@@ -1,8 +1,12 @@
 import base64
 
-with open("/home/user/school-projects/design/logos/school-logo.jpg", "rb") as f:
+# Pre-baked circular PNGs (background + ring already composited in with PIL) instead of
+# CSS border-radius/overflow:hidden clipping on a square photo — some PDF renderers
+# (Apple's PDFKit among them) don't reliably apply that clip to Chromium-exported PDFs,
+# which left the photo's square white background showing through as a box behind the circle.
+with open("/home/user/school-projects/design/logos/school-logo-circle.png", "rb") as f:
     SCHOOL_B64 = base64.b64encode(f.read()).decode()
-with open("/home/user/school-projects/design/logos/dept-logo.jpg", "rb") as f:
+with open("/home/user/school-projects/design/logos/dept-logo-circle.png", "rb") as f:
     DEPT_B64 = base64.b64encode(f.read()).decode()
 
 TITLES = [
@@ -54,12 +58,8 @@ def page_html(title, is_last):
     <div style="position:absolute; bottom:20px; left:20px; width:24px; height:24px; border-bottom:2px solid #ccbb8a; border-left:2px solid #ccbb8a;"></div>
 
     <div style="display:flex; align-items:center; justify-content:center; gap:64px; padding-top:54px;">
-      <div style="width:120px; height:120px; border-radius:50%; overflow:hidden; border:3px solid #1e1d6b; box-shadow:0 4px 14px -4px rgba(30,29,107,.25); background:#fbfcfd;">
-        <img src="data:image/jpeg;base64,{SCHOOL_B64}" alt="شعار المدرسة" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="width:120px; height:120px; border-radius:50%; overflow:hidden; border:3px solid #1e1d6b; box-shadow:0 4px 14px -4px rgba(30,29,107,.25); background:#fbfcfd;">
-        <img src="data:image/jpeg;base64,{DEPT_B64}" alt="شعار القسم" style="width:100%; height:100%; object-fit:cover;">
-      </div>
+      <img src="data:image/png;base64,{SCHOOL_B64}" alt="شعار المدرسة" width="120" height="120" style="width:120px; height:120px; display:block;">
+      <img src="data:image/png;base64,{DEPT_B64}" alt="شعار القسم" width="120" height="120" style="width:120px; height:120px; display:block;">
     </div>
 
     <div style="display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center; padding:0 40px;">
