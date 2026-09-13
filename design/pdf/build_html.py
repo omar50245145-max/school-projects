@@ -1,0 +1,117 @@
+import base64
+
+with open("/home/user/school-projects/design/logos/school-logo.jpg", "rb") as f:
+    SCHOOL_B64 = base64.b64encode(f.read()).decode()
+with open("/home/user/school-projects/design/logos/dept-logo.jpg", "rb") as f:
+    DEPT_B64 = base64.b64encode(f.read()).decode()
+
+TITLES = [
+    "سجل زيارات رئيس القسم",
+    "سجل الضعاف والمتفوقين",
+    "سجل التنمية المهنية",
+    "سجل الخطة",
+    "سجل ما قُطع من المنهج",
+    "سجل زيارات المعلمين",
+]
+
+PATTERN_URL = (
+    "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27220%27%20height%3D%27220%27%20viewBox%3D%270%200%20220%20220%27%3E"
+    "%0A%20%20%3Cg%20fill%3D%27none%27%20stroke%3D%27%231e1d6b%27%20stroke-width%3D%271.4%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20opacity%3D%270.055%27%3E"
+    "%0A%20%20%20%20%3Cg%20transform%3D%27translate%2820%2C20%29%20rotate%28-8%29%27%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M0%206l18-8%2018%208-18%208-18-8z%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M7%2010v9c0%203%205%205.5%2011%205.5s11-2.5%2011-5.5v-9%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M33%207v11%27/%3E"
+    "%0A%20%20%20%20%3C/g%3E"
+    "%0A%20%20%20%20%3Cg%20transform%3D%27translate%28115%2C35%29%20rotate%2810%29%27%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M0%203c0-1.6%201.4-2.5%203.4-2.5h13c1.6%200%202.6.8%202.6%202.5v21c0-1.6-1-2.5-2.6-2.5H3.4c-2%200-3.4.9-3.4%202.5V3z%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M32%203c0-1.6-1.4-2.5-3.4-2.5h-13c-1.6%200-2.6.8-2.6%202.5v21c0-1.6%201-2.5%202.6-2.5h13c2%200%203.4.9%203.4%202.5V3z%27/%3E"
+    "%0A%20%20%20%20%3C/g%3E"
+    "%0A%20%20%20%20%3Cg%20transform%3D%27translate%2835%2C120%29%20rotate%2824%29%27%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M0%2020L20%200l6%206-20%2020-7%201%201-7z%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M14%206l6%206%27/%3E"
+    "%0A%20%20%20%20%3C/g%3E"
+    "%0A%20%20%20%20%3Cg%20transform%3D%27translate%28140%2C140%29%20rotate%28-14%29%27%3E"
+    "%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2712%27%20cy%3D%2712%27%20r%3D%279%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M12%2021v6M8%2030h8M9%2027h6%27/%3E"
+    "%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M8.5%2016.5c-1.5-1.5-2-3.3-1.4-5.4%27/%3E"
+    "%0A%20%20%20%20%3C/g%3E"
+    "%0A%20%20%3C/g%3E"
+    "%0A%3C/svg%3E"
+)
+
+
+def page_html(title, is_last):
+    break_style = "" if is_last else "page-break-after: always;"
+    return f"""
+<div style="width:794px; height:1123px; background:#eef2f6; padding:30px; position:relative; box-sizing:border-box; {break_style}">
+  <div style="width:100%; height:100%; background-color:#fbfcfd; background-image:url('{PATTERN_URL}'); background-size:220px 220px; background-repeat:repeat; border:3px double #1e1d6b; border-radius:6px; padding:0; display:flex; flex-direction:column; align-items:center; justify-content:space-between; position:relative; overflow:hidden; box-sizing:border-box;">
+
+    <div style="width:100%; height:9px; background:linear-gradient(90deg, #1e1d6b, #4795e5 45%, #0d5a74 100%); flex-shrink:0;"></div>
+
+    <div style="position:absolute; top:25px; right:20px; width:24px; height:24px; border-top:2px solid #ccbb8a; border-right:2px solid #ccbb8a;"></div>
+    <div style="position:absolute; top:25px; left:20px; width:24px; height:24px; border-top:2px solid #ccbb8a; border-left:2px solid #ccbb8a;"></div>
+    <div style="position:absolute; bottom:20px; right:20px; width:24px; height:24px; border-bottom:2px solid #ccbb8a; border-right:2px solid #ccbb8a;"></div>
+    <div style="position:absolute; bottom:20px; left:20px; width:24px; height:24px; border-bottom:2px solid #ccbb8a; border-left:2px solid #ccbb8a;"></div>
+
+    <div style="display:flex; align-items:center; justify-content:center; gap:64px; padding-top:54px;">
+      <div style="width:120px; height:120px; border-radius:50%; overflow:hidden; border:3px solid #1e1d6b; box-shadow:0 4px 14px -4px rgba(30,29,107,.35); background:#fff;">
+        <img src="data:image/jpeg;base64,{SCHOOL_B64}" alt="شعار المدرسة" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div style="width:120px; height:120px; border-radius:50%; overflow:hidden; border:3px solid #0d5a74; box-shadow:0 4px 14px -4px rgba(13,90,116,.35); background:#fff;">
+        <img src="data:image/jpeg;base64,{DEPT_B64}" alt="شعار القسم" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center; padding:0 40px;">
+      <h1 style="margin:0; font-family:'Amiri', serif; font-weight:700; font-size:50px; color:#1e1d6b; line-height:1.3;">{title}</h1>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span style="width:40px; height:1.5px; background:#0d5a74;"></span>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="#ccbb8a" style="transform:rotate(45deg)"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+        <span style="width:40px; height:1.5px; background:#0d5a74;"></span>
+      </div>
+      <span style="font-family:'Amiri', serif; font-weight:700; font-size:23px; color:#0d5a74;">العام الدراسي 2026 <span dir="ltr">/</span> 2027</span>
+    </div>
+
+    <div style="width:100%; display:flex; flex-direction:column; gap:20px; padding:0 48px 40px; box-sizing:border-box;">
+      <div style="width:100%; height:1.5px; background:linear-gradient(90deg, #0d5a74, #ccbb8a 50%, #1e1d6b);"></div>
+      <div style="width:100%; display:flex; align-items:flex-end; justify-content:space-between;">
+        <div style="text-align:center;">
+          <div style="font-size:12px; color:#7a828c; margin-bottom:6px; font-weight:500;">رئيس القسم</div>
+          <div style="font-size:16px; font-weight:700; color:#1e1d6b;">عمر الزنكي</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:12px; color:#7a828c; margin-bottom:6px; font-weight:500;">مدير المدرسة</div>
+          <div style="font-size:16px; font-weight:700; color:#1e1d6b;">عبدالله عيسى خورشيد</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+"""
+
+
+pages = "".join(page_html(t, i == len(TITLES) - 1) for i, t in enumerate(TITLES))
+
+html = f"""<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body {{ margin:0; padding:0; }}
+  * {{ box-sizing:border-box; font-family:'Cairo', system-ui, sans-serif; }}
+  @page {{ size: A4; margin: 0; }}
+</style>
+</head>
+<body dir="rtl">
+{pages}
+</body>
+</html>
+"""
+
+with open("/home/user/school-projects/design/pdf/covers.html", "w", encoding="utf-8") as f:
+    f.write(html)
+
+print("wrote covers.html,", len(html), "bytes")
